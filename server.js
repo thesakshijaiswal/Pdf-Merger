@@ -4,7 +4,7 @@ const app = express();
 const multer = require("multer");
 const { mergePdfs } = require("./merge");
 const upload = multer({ dest: "uploads/" });
-app.use("/static", express.static("public"));
+app.use("/static", express.static("/templates"));
 
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "templates/index.html"));
