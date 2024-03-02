@@ -17,11 +17,14 @@ app.post("/merge", upload.array("pdfs", 2), async (req, res) => {
       throw new Error("please select exactly two PDFs to merge");
     }
 
-    let d = await mergePdfs(
+    let generationTimestamp = await mergePdfs(
       path.join(__dirname, req.files[0].path),
       path.join(__dirname, req.files[1].path),
     );
-    const mergedPdfPath = path.join(__dirname, `public/generatedPdfs/${d}.pdf`);
+    const mergedPdfPath = path.join(
+      __dirname,
+      `/generatedPdfs/${generationTimestamp}.pdf`,
+    );
     fs.readFile(mergedPdfPath, (err, data) => {
       if (err) {
         throw new Error("Failed to read the merged PDF file.");
@@ -33,6 +36,5 @@ app.post("/merge", upload.array("pdfs", 2), async (req, res) => {
     console.error(error);
     res.status(500).json({ message: error.message });
   }
-  //res.redirect(`http://localhost:3000/static/${d}.pdf`);
 });
 app.listen(3000);

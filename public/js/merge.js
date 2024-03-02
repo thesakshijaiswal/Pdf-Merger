@@ -3,8 +3,8 @@ const mergePdfs = async (pdf1, pdf2) => {
   var merger = new PDFMerger.default();
   await merger.add(pdf1);
   await merger.add(pdf2);
-  let d = new Date().getTime();
-  await merger.save(`public/${d}.pdf`);
-  return d;
+  let generationTimestamp = new Date().getTime();
+  await merger.save(`public/generatedPdfs/${generationTimestamp}.pdf`);
+  return generationTimestamp;
 };
 module.exports = { mergePdfs };
