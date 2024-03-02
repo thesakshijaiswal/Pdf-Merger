@@ -1,21 +1,38 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 const app = express();
 const multer = require("multer");
-const { mergePdfs } = require("./merge");
+const { mergePdfs } = require("./public/js/merge");
 const upload = multer({ dest: "uploads/" });
-app.use(express.static(path.join(__dirname, "templates")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "templates/index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.post("/merge", upload.array("pdfs", 2), async (req, res, next) => {
-  console.log(req.files);
-  let d = await mergePdfs(
-    path.join(__dirname, req.files[0].path),
-    path.join(__dirname, req.files[1].path),
-  );
-  res.redirect(`http://localhost:3000/static/${d}.pdf`);
+app.post("/merge", upload.array("pdfs", 2), async (req, res) => {
+  try {
+    if (req.files.length !== 2) {
+      throw new Error("please select exactly two PDFs to merge");
+    }
+
+    let d = await mergePdfs(
+      path.join(__dirname, req.files[0].path),
+      path.join(__dirname, req.files[1].path),
+    );
+    const mergedPdfPath = path.join(__dirname, `public/generatedPdfs/${d}.pdf`);
+    fs.readFile(mergedPdfPath, (err, data) => {
+      if (err) {
+        throw new Error("Failed to read the merged PDF file.");
+      }
+      res.setHeader("Content-Type", "application/pdf");
+      res.send(data);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+  //res.redirect(`http://localhost:3000/static/${d}.pdf`);
 });
 app.listen(3000);
