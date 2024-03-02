@@ -83,13 +83,33 @@ header ul li a.active {
   font-size: 3.5rem;
   font-weight: 600;
 }
-
+.container p {
+  font-size: 1.5rem;
+  margin: 10px 0 15px;
+}
 #submit {
   background-color: #c4ff40;
   color: black;
-  padding: 10px 20px;
+  padding: 10px 30px;
   outline: none;
   border: black;
   margin-top: 20px;
   border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+input[type="file"]::file-selector-button {
+  border: none;
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
+  background-color: #c4ff40f1;
+  transition: 1s;
+  color: black;
+  font-weight: 400;
+}
+.form-group label {
+  font-size: 1.1rem;
+}
+.form-group input {
+  font-size: 1.1rem;
 }

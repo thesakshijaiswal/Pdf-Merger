@@ -23,13 +23,14 @@ app.post("/merge", upload.array("pdfs", 2), async (req, res) => {
     );
     const mergedPdfPath = path.join(
       __dirname,
-      `/generatedPdfs/${generationTimestamp}.pdf`,
+      `public/generatedPdfs/${generationTimestamp}.pdf`,
     );
     fs.readFile(mergedPdfPath, (err, data) => {
       if (err) {
         throw new Error("Failed to read the merged PDF file.");
       }
-      res.setHeader("Content-Type", "application/pdf");
+      // res.setHeader("Content-Type", "application/pdf");
+      res.setHeader("Content-Disposition", `attachment; filename="merged.pdf"`);
       res.send(data);
     });
   } catch (error) {
