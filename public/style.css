@@ -28,7 +28,7 @@ header {
   padding: 30px 100px;
   display: flex;
   justify-content: space-between;
-  align-item: center;
+  align-items: center;
 }
 
 header .logo {
@@ -95,14 +95,14 @@ header ul li a.active {
   outline: none;
   border: black;
   margin-top: 20px;
-  border-radius: 5px;
+  border-radius: 0.3em;
   font-size: 1.2rem;
   font-weight: 500;
 }
 input[type="file"]::file-selector-button {
   border: none;
   padding: 0.2em 0.4em;
-  border-radius: 0.2em;
+  border-radius: 0.3em;
   background-color: #c4ff40f1;
   transition: 1s;
   color: black;
