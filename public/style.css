@@ -8,6 +8,7 @@
 body {
   min-height: 100vh;
   background: linear-gradient(#c4ff40, #b6ed3b);
+  overflow: hidden;
 }
 
 section {
@@ -59,7 +60,7 @@ header ul li a {
 
 header ul li a:hover,
 header ul li a.active {
-  background: #fff;
+  background: #d7d7d7;
   color: #2b1055;
 }
 
@@ -109,7 +110,9 @@ input[type="file"]::file-selector-button {
 }
 .form-group label {
   font-size: 1.1rem;
+  color: #d7d7d7;
 }
 .form-group input {
   font-size: 1.1rem;
+  color: #d7d7d7;
 }
